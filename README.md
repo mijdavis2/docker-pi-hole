@@ -7,40 +7,16 @@
 
 ## Quick Start
 
-[Docker-compose](https://docs.docker.com/compose/install/) example:
+> This repo has been forked from [pi-hole](https://github.com/pi-hole/docker-pi-hole) and altered to include an easy upgrade script. The quickstart below is custom to this fork.
 
-```yaml
-version: "3"
+Clone the repo and run `./docker_run.sh` to pull and deploy the latest pihole container. 
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
-services:
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
-      - "443:443/tcp"
-    environment:
-      TZ: 'America/Chicago'
-      # WEBPASSWORD: 'set a secure password here or it will be random'
-    # Volumes store your data between container upgrades
-    volumes:
-       - './etc-pihole/:/etc/pihole/'
-       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    dns:
-      - 127.0.0.1
-      - 1.1.1.1
-    # Recommended but not required (DHCP needs NET_ADMIN)
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN
-    restart: unless-stopped
-```
+> Update TZ in `./docker_run.sh` before running if you don't live in PST timezone.
 
-[Here is an equivilent docker run script](https://github.com/pi-hole/docker-pi-hole/blob/master/docker_run.sh).
+To _upgrade_ your pihole when a new docker image comes out, use the `./docker_upgrade.sh` script WHILE YOUR PIHOLE IS STILL RUNNING. This will 
+- pull the latest image (while your current pihole is still up and running and DNS works)
+- replace the running pihole container with the latest version
+- and clean up dangling docker images.
 
 ## Upgrade Notices:
 
