@@ -18,6 +18,10 @@ To _upgrade_ your pihole when a new docker image comes out, use the `./docker_up
 - replace the running pihole container with the latest version
 - and clean up dangling docker images.
 
+**DNS over HTTPS**
+
+For DNS over HTTPS, run `docker-compose -f docker-compose-doh.yml up -d`. Make sure to use the correct image for your machine's architecture!
+
 ## Upgrade Notices:
 
 ### Docker Pi-Hole v4.2.2
